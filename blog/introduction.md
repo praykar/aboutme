@@ -1,4 +1,4 @@
-[← Part 1](../blog-template.html?post=executive_summary) | [View Infographic](../RAG.html) | [Part 3 →](../blog-template.html?post=graphqa_in_rag)
+[← Part 1](/blog-template.html?post=executive_summary) | [Dev](/RAG.html) | [Part 3 →](/blog-template.html?post=graphqa_in_rag)
 
 # **Optimizing Bot Responses in RAG Systems with Personalized Intelligence: Part 2**
 

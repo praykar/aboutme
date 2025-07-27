@@ -1,4 +1,4 @@
-[← Part 2](../blog-template.html?post=introduction) | [View Infographic](../RAG.html) | [Back to Portfolio →](../index.html)
+[← Part 2](/blog-template.html?post=introduction) | [Dev](/RAG.html)
 
 # **Optimizing Bot Responses in RAG Systems with Personalized Intelligence: Part 3**
 
