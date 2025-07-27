@@ -1,4 +1,4 @@
-[Dev](/RAG.html) | [Part 2 →](/blog-template.html?post=introduction)
+[Dev](/aboutme/RAG.html) | [Part 2 →](/aboutme/blog-template.html?post=introduction)
 
 # **Optimizing Bot Responses in RAG Systems with Personalized Intelligence: Part 1**
 
