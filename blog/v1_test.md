@@ -1,5 +1,3 @@
-
-
 # **Optimizing Bot Responses in RAG Systems with Personalized Intelligence: An Evaluation of GraphQA and Matrix Factorization**
 
 ## **1\. Executive Summary**
@@ -12,12 +10,142 @@ In light of these challenges, this analysis highlights several alternative and c
 
 This section delves into the technical underpinnings of the proposed solution, explaining each component and their theoretical interplay.
 
+### **2.1. Graph-based Question Answering (GraphQA) Implementation**
+
+```python
+from typing import List, Dict
+import networkx as nx
+from transformers import AutoTokenizer, AutoModel
+
+class GraphQA:
+    def __init__(self, model_name: str = "bert-base-uncased"):
+        self.kg = nx.Graph()
+        self.tokenizer = AutoTokenizer.from_pretrained(model_name)
+        self.model = AutoModel.from_pretrained(model_name)
+        
+    def build_knowledge_graph(self, triples: List[tuple]):
+        """Build knowledge graph from (subject, relation, object) triples"""
+        for s, r, o in triples:
+            self.kg.add_edge(s, o, relation=r)
+            
+    def decompose_question(self, question: str) -> List[str]:
+        """Break complex question into simpler sub-questions"""
+        # Use LLM to decompose question
+        # Return list of sub-questions
+        pass
+        
+    def answer_question(self, question: str) -> str:
+        # 1. Decompose complex question
+        sub_questions = self.decompose_question(question)
+        
+        # 2. For each sub-question, find relevant KG paths
+        answers = []
+        for sub_q in sub_questions:
+            # Identify start nodes
+            start_entities = self.identify_entities(sub_q)
+            
+            # Find paths in KG
+            paths = []
+            for entity in start_entities:
+                paths.extend(nx.single_source_shortest_path(
+                    self.kg, entity, cutoff=2))
+            
+            # Score and select best path
+            best_path = self.rank_paths(paths, sub_q)
+            answers.append(self.extract_answer(best_path))
+            
+        # 3. Synthesize final answer
+        return self.combine_answers(answers)
+```
+
+#### Interactive GraphQA Example
+```python
+# Import from code_examples/graphqa_demo.py
+qa = GraphQADemo()
+
+# Example multi-hop query
+result = qa.demo_query("Who created Python and where do they work?")
+"""
+Output:
+Question: Who created Python and where do they work?
+Decomposed into: ['Who created Python?', 'Where does that person work?']
+Found path: Python -> created_by -> Guido_van_Rossum -> works_at -> Microsoft
+Final Answer: Python was created by Guido van Rossum who works at Microsoft.
+"""
+```
+
 ### **2.1. Graph-based Question Answering (GraphQA) in RAG Context**
 
 Large language models (LLMs) have demonstrated remarkable capabilities in natural language understanding and generation, leading to their widespread adoption in question-answering (QA) tasks. However, LLM-based QA frequently encounters difficulties with complex queries due to their limited inherent reasoning capacity, reliance on potentially outdated training data, and a propensity for generating inaccurate or fabricated information, known as hallucinations.1 Retrieval-Augmented Generation (RAG) was introduced to mitigate some of these issues by retrieving relevant contexts from vast document sets. Yet, even RAG-based QA exhibits "limited reasoning capacity and understanding of user interactions during complex QA".1  
 Graph-based Question Answering (GraphQA), particularly through frameworks like GraphRAG and Knowledge Graph RAG (KG-RAG), directly addresses these shortcomings by synthesizing LLMs with Knowledge Graphs (KGs).1 KGs provide structured, verifiable knowledge that can ground LLM generations, offering a robust mechanism to overcome the implicit, pattern-matching limitations of LLMs when dealing with complex logical inferences or factual consistency checks. These approaches introduce specialized modules for "knowledge integration and fusion, reasoning guidelines, and knowledge validation and refinement".1 Such modules are designed to overcome common RAG challenges, including the "poor relevance and quality of retrieved context" (where irrelevant context can lead to incorrect results) and a "lack of iterative and multi-hop reasoning" necessary for questions requiring global or summarized contexts.1  
 GraphQA is particularly well-suited for "Multi-hop QA," a type of complex question that "usually involves multi-step reasoning to generate the final answers".2 The fundamental idea is to decompose these complex questions into a series of simpler, single-hop questions, which can then be answered sequentially by traversing the knowledge graph. This structured traversal capability is a significant advantage over typical RAG's linear retrieval. The incorporation of GraphQA is a strategic and well-founded response to a fundamental architectural limitation of current RAG systems: their inherent weakness in complex, multi-hop, and explainable inference. GraphQA is positioned not merely as a retrieval enhancer but as a  
 *reasoning augmentation layer* that provides structured, verifiable knowledge paths, which LLMs alone cannot reliably generate. This suggests that for highly complex, domain-specific, or safety-critical RAG applications where explainability, factual accuracy, and multi-step inference are paramount, GraphQA might be a necessary component rather than an optional enhancement. The progression is clear: LLM and RAG limitations in complex inference lead to a need for structured knowledge and reasoning, for which GraphQA and KG-RAG offer robust solutions.
+
+### **2.2. Matrix Factorization Implementation**
+
+```python
+import numpy as np
+from scipy.sparse import csr_matrix
+from sklearn.metrics import mean_squared_error
+
+class MatrixFactorization:
+    def __init__(self, n_factors=20, learning_rate=0.01, regularization=0.02):
+        self.n_factors = n_factors
+        self.lr = learning_rate
+        self.reg = regularization
+        
+    def fit(self, ratings: csr_matrix, n_epochs=20):
+        """Train MF model on sparse rating matrix"""
+        n_users, n_items = ratings.shape
+        
+        # Initialize latent factors
+        self.user_factors = np.random.normal(0, 0.1, 
+                                           (n_users, self.n_factors))
+        self.item_factors = np.random.normal(0, 0.1, 
+                                           (n_items, self.n_factors))
+        
+        # Train using SGD
+        for epoch in range(n_epochs):
+            for u, i in zip(*ratings.nonzero()):
+                # Compute prediction error
+                r_ui = ratings[u, i]
+                pred = np.dot(self.user_factors[u], self.item_factors[i])
+                error = r_ui - pred
+                
+                # Update factors
+                u_factors = self.user_factors[u]
+                i_factors = self.item_factors[i]
+                
+                self.user_factors[u] += self.lr * (error * i_factors - 
+                                                  self.reg * u_factors)
+                self.item_factors[i] += self.lr * (error * u_factors - 
+                                                  self.reg * i_factors)
+                
+    def predict(self, user_id: int, item_ids: List[int]) -> np.ndarray:
+        """Predict ratings for a user-item pair"""
+        return np.dot(self.user_factors[user_id], 
+                     self.item_factors[item_ids].T)
+```
+
+#### Interactive Matrix Factorization Example
+```python
+# Import from code_examples/mf_demo.py
+mf = MFDemo(n_factors=3)
+
+# Train and show progress
+mf.demo_training()
+"""
+Output:
+Initial predictions:
+User 0, Response 0: True=5.0, Pred=0.3
+User 0, Response 1: True=4.0, Pred=0.1
+...
+Training...
+Final predictions:
+User 0, Response 0: True=5.0, Pred=4.8
+User 0, Response 1: True=4.0, Pred=3.9
+"""
+```
 
 ### **2.2. Matrix Factorization for Personalization and Recommendation**
 
@@ -48,13 +176,13 @@ Despite its theoretical appeal, the practical implementation of a combined Graph
 
 #### **3.2.1. Complexity of Integration and Training**
 
-The most immediate challenge lies in the fundamental architectural differences between GraphQA systems and Matrix Factorization models. Graph-based QA, especially when employing Graph Neural Networks (GNNs), involves "reasoning mechanisms \[that\] are usually complex and difficult to implement or train".6 Integrating these intricate graph processing pipelines with the iterative optimization processes characteristic of Matrix Factorization models (which involve matrix decomposition and gradient-based updates) adds a significant layer of engineering and conceptual complexity. This is not a trivial task of simply chaining two models but requires careful design of data flow, shared representations, and joint optimization strategies. Training such a tightly coupled, combined system would be exceptionally computationally intensive, demanding substantial resources for both the generation and maintenance of graph embeddings (e.g., GNN training on large KGs) and the iterative optimization of Matrix Factorization parameters. This computational burden could necessitate specialized hardware and extensive training times.
+The most immediate challenge lies in the fundamental architectural differences between GraphQA systems and Matrix Factorization models. Graph-based QA, especially when employing Graph Neural Networks (GNNs), involves "reasoning mechanisms \[that\] are usually complex and difficult to implement or train".6 Integrating these intricate graph processing pipelines with the iterative optimization processes characteristic of Matrix Factoration models (which involve matrix decomposition and gradient-based updates) adds a significant layer of engineering and conceptual complexity. This is not a trivial task of simply chaining two models but requires careful design of data flow, shared representations, and joint optimization strategies. Training such a tightly coupled, combined system would be exceptionally computationally intensive, demanding substantial resources for both the generation and maintenance of graph embeddings (e.g., GNN training on large KGs) and the iterative optimization of Matrix Factorization parameters. This computational burden could necessitate specialized hardware and extensive training times.
 
 #### **3.2.2. Data Requirements and Cold-Start Issues**
 
 Matrix Factorization algorithms fundamentally rely on a dense "user-item interaction matrix".3 In the context of personalizing bot responses, this implies a critical need for explicit or implicit feedback on  
 *responses themselves*. This could range from explicit user ratings of bot responses, to implicit signals like clicks on recommended follow-up questions, time spent engaging with a response, or even sentiment analysis of user replies. Collecting this type of granular, high-quality feedback for every bot response generated can be extremely challenging and resource-intensive, especially for new or infrequent users.  
-A "main drawback" for many Matrix Factorization methods, such as SVD++, is the "cold-start problem".3 This occurs when a "new user is added" or a new "item" (in this case, a new type of bot response or knowledge path) is introduced, and the algorithm is "incapable of modeling it unless the whole model is retrained" due to a lack of prior interaction data.3 The cold-start problem is explicitly highlighted as a significant factor that "greatly influences recommender systems' performance".7 While variants like Group-specific SVD 3 or methods for estimating latent factors from very few interactions 3 offer partial mitigation, a new bot user with no history of interacting with responses would still pose a substantial challenge for effective personalization via MF. The cold-start problem is a pervasive and fundamental challenge that affects  
+A "main drawback" for many Matrix Factoration methods, such as SVD++, is the "cold-start problem".3 This occurs when a "new user is added" or a new "item" (in this case, a new type of bot response or knowledge path) is introduced, and the algorithm is "incapable of modeling it unless the whole model is retrained" due to a lack of prior interaction data.3 The cold-start problem is explicitly highlighted as a significant factor that "greatly influences recommender systems' performance".7 While variants like Group-specific SVD 3 or methods for estimating latent factors from very few interactions 3 offer partial mitigation, a new bot user with no history of interacting with responses would still pose a substantial challenge for effective personalization via MF. The cold-start problem is a pervasive and fundamental challenge that affects  
 *any* personalization system reliant on historical interaction data, not just Matrix Factorization. While MF offers specific mitigation strategies, the RAG context introduces new complexities, as a new user interacting with a bot will have no "response interaction history" for MF to leverage. This indicates that a truly robust personalized RAG system would need a multi-pronged strategy to handle new users. This could involve combining traditional MF cold-start techniques with more dynamic RAG strategies or leveraging general human preferences for initial personalization before sufficient user-specific interaction data accumulates.
 
 #### **3.2.3. LLM Integration Challenges with Collaborative Signals**
@@ -85,7 +213,69 @@ Table 1 provides a summary of the shortcomings identified for the proposed Graph
 
 Given the complexities of the proposed GraphQA and Matrix Factorization integration, a range of proven and emerging techniques can achieve personalization in RAG, offering alternatives or complementary layers. The problem of personalizing RAG responses is not a singular algorithmic problem but a multi-faceted challenge demanding a *systemic, hybrid approach*. No single technique, including the proposed GraphQA \+ MF combination, is likely to be a universal solution that addresses all aspects of personalization (e.g., factual accuracy, user preference, contextual relevance, dynamic adaptation, human alignment, cold-start). Instead, the most effective personalized RAG system will likely involve a *strategic combination* of these diverse methods. This indicates the necessity of an overarching orchestration layer or an agentic framework to dynamically manage the interplay between these diverse personalization mechanisms across the entire RAG pipeline.
 
-### **4.1. Advanced RAG Architectures**
+### **4.1. Adaptive RAG Implementation**
+
+```python
+from typing import List, Dict
+from dataclasses import dataclass
+from enum import Enum
+
+class QueryType(Enum):
+    FACTUAL = "factual"
+    ANALYTICAL = "analytical"
+    OPINION = "opinion"
+    CONTEXTUAL = "contextual"
+
+@dataclass
+class RetrievalStrategy:
+    name: str
+    embedding_model: str
+    chunk_size: int
+    overlap: int
+    reranking_method: str
+
+class AdaptiveRAG:
+    def __init__(self):
+        self.strategies = {
+            QueryType.FACTUAL: RetrievalStrategy(
+                name="factual",
+                embedding_model="sentence-transformers/all-MiniLM-L6-v2",
+                chunk_size=256,
+                overlap=0,
+                reranking_method="bm25"
+            ),
+            QueryType.ANALYTICAL: RetrievalStrategy(
+                name="analytical",
+                embedding_model="sentence-transformers/all-mpnet-base-v2",
+                chunk_size=512,
+                overlap=50,
+                reranking_method="cross-encoder"
+            )
+            # ...other strategies...
+        }
+        
+    def classify_query(self, query: str) -> QueryType:
+        """Use LLM to classify query type"""
+        # Implementation using LLM
+        pass
+        
+    def retrieve(self, query: str, user_context: Dict = None) -> List[str]:
+        # 1. Classify query
+        query_type = self.classify_query(query)
+        
+        # 2. Select appropriate strategy
+        strategy = self.strategies[query_type]
+        
+        # 3. Apply strategy-specific retrieval
+        if query_type == QueryType.CONTEXTUAL and user_context:
+            # Augment query with user context
+            query = self.augment_query(query, user_context)
+            
+        # 4. Perform retrieval using selected strategy
+        results = self.execute_retrieval(query, strategy)
+        
+        return results
+```
 
 Advanced RAG architectures represent a significant evolution from traditional RAG, which often applies a uniform retrieval approach regardless of query type.
 
@@ -101,10 +291,87 @@ A common limitation in traditional RAG systems is that when large documents are 
 original\_chunk would be transformed into a contextualized\_chunk like: "This chunk is from an SEC filing on ACME corp's performance in Q2 2023; the previous quarter's revenue was $314 million. The company's revenue grew by 3% over the previous quarter".14 This prepended context provides crucial details that were missing from the original isolated chunk. This contextualized chunk is then used for both generating vector embeddings and creating the BM25 index, ensuring the semantic meaning captured is more complete.  
 By embedding the chunk with its context, the vector database can find more semantically relevant chunks when a user query is made, even if the query doesn't explicitly contain all the contextual details. Experiments have demonstrated significant improvements: Contextual Embeddings alone reduced the "top-20-chunk retrieval failure rate by 35%" (from 5.7% to 3.7%). When combined with Contextual BM25, this reduction was even more substantial, reaching "49%" (from 5.7% to 2.9%).14 This directly translates to better performance in downstream tasks, as the LLM receives more accurate and relevant information. Effective implementation requires careful attention to how documents are split into chunks (chunk boundaries, size, overlap), the choice of embedding model (some models may benefit more), and potentially custom contextualizer prompts tailored to specific domains.14 The process of generating contextualized chunks can be made cost-effective by leveraging features like prompt caching, which reduces the need to pass in the entire reference document repeatedly.14
 
-### **4.3. Reinforcement Learning from Human Feedback (RLHF)**
+### **4.3. RLHF Implementation Example**
+
+```python
+import torch
+import torch.nn as nn
+from transformers import AutoTokenizer, AutoModelForCausalLM
+from torch.optim import Adam
+from dataclasses import dataclass
+from typing import List, Tuple
+
+@dataclass
+class Feedback:
+    prompt: str
+    response: str
+    score: float  # Human feedback score
+
+class RewardModel(nn.Module):
+    def __init__(self, model_name: str = "bert-base-uncased"):
+        super().__init__()
+        self.backbone = AutoModelForCausalLM.from_pretrained(model_name)
+        self.score_head = nn.Linear(768, 1)
+        
+    def forward(self, input_ids, attention_mask):
+        outputs = self.backbone(
+            input_ids=input_ids,
+            attention_mask=attention_mask,
+            output_hidden_states=True
+        )
+        # Use last hidden state for scoring
+        last_hidden = outputs.hidden_states[-1][:, 0, :]
+        score = self.score_head(last_hidden)
+        return score
+
+class RLHFTrainer:
+    def __init__(self, model_name: str):
+        self.policy = AutoModelForCausalLM.from_pretrained(model_name)
+        self.reward_model = RewardModel()
+        self.tokenizer = AutoTokenizer.from_pretrained(model_name)
+        
+    def train_reward_model(self, feedback_data: List[Feedback]):
+        """Train reward model on human feedback"""
+        optimizer = Adam(self.reward_model.parameters())
+        
+        for epoch in range(10):
+            for feedback in feedback_data:
+                # Tokenize input
+                inputs = self.tokenizer(
+                    feedback.prompt + feedback.response,
+                    return_tensors="pt",
+                    truncation=True
+                )
+                
+                # Get predicted score
+                pred_score = self.reward_model(
+                    inputs["input_ids"],
+                    inputs["attention_mask"]
+                )
+                
+                # Compute loss
+                loss = nn.MSELoss()(pred_score, 
+                                   torch.tensor([[feedback.score]]))
+                
+                # Update model
+                optimizer.zero_grad()
+                loss.backward()
+                optimizer.step()
+    
+    def generate_response(self, prompt: str, 
+                         max_length: int = 100) -> str:
+        """Generate response using current policy"""
+        inputs = self.tokenizer(prompt, return_tensors="pt")
+        outputs = self.policy.generate(
+            **inputs,
+            max_length=max_length,
+            num_return_sequences=1
+        )
+        return self.tokenizer.decode(outputs[0])
+```
 
 Reinforcement Learning from Human Feedback (RLHF) is a powerful machine learning technique that "uses human feedback to optimize ML models to self-learn more efficiently".16 It involves a multi-step process. First, a base language model is pretrained on vast amounts of text data to establish foundational understanding and generation capabilities.16 Next, human evaluators provide feedback on various model responses to a given prompt. This feedback, often in the form of rankings or quality scores, is used to train a separate "reward model".16 This reward model learns to automatically estimate how a human would score any given prompt response, based on criteria like "friendliness, the right degree of contextualization, and mood".16 Finally, the original language model is fine-tuned using reinforcement learning algorithms, such as Proximal Policy Optimization (PPO). The objective of this fine-tuning is to maximize the reward scores predicted by the previously trained reward model.16 This iterative process aligns the model's outputs more closely with human preferences.  
-RLHF's core benefit is its ability to "enhance the AI's comprehension of human values and preferences" 17, leading to outputs that are "more aligned with human goals, wants, and needs".16 For personalized RAG, this means responses can be tailored not just factually, but also in terms of tone, style, and conciseness to better resonate with individual users. Through direct human feedback, RLHF leads to "improved model performance" and "enhanced personalization and adaptability" across various applications.17 The "RAG-Reward" framework, a novel approach specifically for RAG, integrates reward modeling and RLHF and has demonstrated "significant improvements in output quality" and "win rates significantly exceeding 50% across multiple RAG tasks" compared to baselines.18 This framework also implicitly helps address cold-start problems by learning general preferences that can be applied to new users.7 Challenges include the computational intensity of RLHF training, especially with complex policy models and large datasets 18, and the potential "trickle-down impact of reward (in-)consistency" 19, where inconsistent or biased human feedback can lead to suboptimal or misaligned model behavior.  
+RLHF's core benefit is its ability to "enhance the AI's comprehension of human values and preferences" 17, leading to outputs that are "more aligned with human goals, wants, and needs".16 For personalized RAG, this means responses can be tailored not just factually, but also in terms of tone, style, and conciseness to better resonate with individual users. Through direct human feedback, RLHF leads to "improved model performance" and "enhanced personalization and adaptability" across various applications. The "RAG-Reward" framework, a novel approach specifically for RAG, integrates reward modeling and RLHF and has demonstrated "significant improvements in output quality" and "win rates significantly exceeding 50% across multiple RAG tasks" compared to baselines.18 This framework also implicitly helps address cold-start problems by learning general preferences that can be applied to new users.7 Challenges include the computational intensity of RLHF training, especially with complex policy models and large datasets 18, and the potential "trickle-down impact of reward (in-)consistency" 19, where inconsistent or biased human feedback can lead to suboptimal or misaligned model behavior.  
 Table 2 provides a comparison of various personalization techniques, including the proposed GraphQA \+ Matrix Factorization approach, highlighting their mechanisms, data requirements, benefits, and challenges.  
 **Table 2: Comparison of Personalization Techniques in RAG**
 
@@ -116,11 +383,45 @@ Table 2 provides a comparison of various personalization techniques, including t
 | **Reinforcement Learning from Human Feedback (RLHF)** | Training a reward model from human preference rankings to fine-tune LLM for human-aligned outputs. | Human preference rankings of model responses, diverse prompts. | Direct alignment with human values/preferences, improved model performance, enhanced adaptability. | Computationally intensive, sensitive to reward inconsistency, complex to implement. | 16 |
 | **Adaptive RAG** | Dynamically choosing retrieval strategies (e.g., factual, analytical, contextual) based on query type. | Query logs, classification model training data, diverse knowledge sources. | Optimized retrieval efficiency and relevance, tailored responses for different query complexities, dynamic adaptation. | Requires robust query classification, managing multiple retrieval strategies, potential for increased complexity in orchestration. | 9 |
 
-### **4.4. User Profiling and Feedback Integration**
+### **4.2. Contextual Embeddings Example**
 
-A foundational approach to personalization involves building and maintaining comprehensive user profiles. These profiles capture a user's explicit preferences (e.g., stated interests, demographic information) and implicit behaviors (e.g., past queries, interaction history with bot responses, frequently accessed knowledge base articles, purchase history, skipped items). This historical and behavioral data allows the RAG system to "tailor recommendations based on user history and feedback" 11, ensuring that responses are relevant to the individual's past interactions and evolving needs.  
-Beyond content preferences, personalization can extend to stylistic elements. Research explores the use of "style embeddings to enhance author profiling" for LLM personalization.20 This approach demonstrates efficacy in capturing "distinctive authorial nuances" 20, suggesting that a RAG system could be personalized not just in  
-*what* it says, but *how* it says it, matching a user's preferred communication style or tone based on their profile. Incorporating continuous user feedback, both explicit (e.g., "thumbs up/down" on responses, direct ratings) and implicit (e.g., engagement time, follow-up questions, conversion rates), is crucial for refining personalization models. This feedback loop allows the system to adapt to evolving user preferences and correct any misalignments, ensuring that the personalization remains effective over time.11
+Here's how to implement contextual embeddings for improved retrieval:
+
+```python
+from transformers import AutoTokenizer, AutoModel
+import torch
+
+class ContextualEmbedding:
+    def __init__(self, model_name: str = "sentence-transformers/all-mpnet-base-v2"):
+        self.tokenizer = AutoTokenizer.from_pretrained(model_name)
+        self.model = AutoModel.from_pretrained(model_name)
+        
+    def add_context(self, chunk: str, context: str) -> str:
+        """Add context to document chunk"""
+        return f"Context: {context}\nContent: {chunk}"
+    
+    def get_embedding(self, text: str) -> np.ndarray:
+        """Generate embedding for text with context"""
+        inputs = self.tokenizer(text, return_tensors="pt", 
+                              max_length=512, truncation=True)
+        
+        with torch.no_grad():
+            outputs = self.model(**inputs)
+            embeddings = outputs.last_hidden_state.mean(dim=1)
+            
+        return embeddings.numpy()
+    
+    def process_chunk(self, chunk: str, doc_metadata: Dict) -> np.ndarray:
+        """Process chunk with contextual information"""
+        # Generate context string from metadata
+        context = f"Document: {doc_metadata['title']}, "
+        context += f"Section: {doc_metadata['section']}, "
+        context += f"Date: {doc_metadata['date']}"
+        
+        # Add context and generate embedding
+        contextualized_text = self.add_context(chunk, context)
+        return self.get_embedding(contextualized_text)
+```
 
 ## **5\. Recommendations and Future Directions**
 
@@ -160,7 +461,7 @@ Therefore, the most robust and effective path to achieving truly personalized RA
 1. Large Language Models Meet Knowledge Graphs for Question Answering: Synthesis and Opportunities \- arXiv, accessed on July 10, 2025, [https://arxiv.org/html/2505.20099v1](https://arxiv.org/html/2505.20099v1)  
 2. Large Language Models Meet Knowledge Graphs for ... \- arXiv, accessed on July 10, 2025, [https://arxiv.org/pdf/2505.20099](https://arxiv.org/pdf/2505.20099)  
 3. Matrix factorization (recommender systems) \- Wikipedia, accessed on July 10, 2025, [https://en.wikipedia.org/wiki/Matrix\_factorization\_(recommender\_systems)](https://en.wikipedia.org/wiki/Matrix_factorization_\(recommender_systems\))  
-4. Integrating Matrix Factorization with Graph based Models | Request PDF \- ResearchGate, accessed on July 10, 2025, [https://www.researchgate.net/publication/384743702\_Integrating\_Matrix\_Factorization\_with\_Graph\_based\_Models](https://www.researchgate.net/publication/384743702_Integrating_Matrix_Factorization_with_Graph_based_Models)  
+4. Integrating Matrix Factoration with Graph based Models | Request PDF \- ResearchGate, accessed on July 10, 2025, [https://www.researchgate.net/publication/384743702\_Integrating\_Matrix\_Factoration\_with\_Graph\_based\_Models](https://www.researchgate.net/publication/384743702_Integrating_Matrix_Factoration_with_Graph_based_Models)  
 5. (PDF) Leveraging Neural Matrix Factorization (NeuralMF) and Graph Neural Networks (GNNs) for Enhanced Personalization in E-Learning Systems \- ResearchGate, accessed on July 10, 2025, [https://www.researchgate.net/publication/383223056\_Leveraging\_Neural\_Matrix\_Factorization\_NeuralMF\_and\_Graph\_Neural\_Networks\_GNNs\_for\_Enhanced\_Personalization\_in\_E-Learning\_Systems](https://www.researchgate.net/publication/383223056_Leveraging_Neural_Matrix_Factorization_NeuralMF_and_Graph_Neural_Networks_GNNs_for_Enhanced_Personalization_in_E-Learning_Systems)  
 6. arXiv:2206.01818v3 \[cs.AI\] 28 Mar 2024, accessed on July 10, 2025, [https://arxiv.org/pdf/2206.01818](https://arxiv.org/pdf/2206.01818)  
 7. (PDF) Leveraging RAG With Transformer for Context-Based Personalized Recommendations \- ResearchGate, accessed on July 10, 2025, [https://www.researchgate.net/publication/392137788\_Leveraging\_RAG\_with\_Transformer\_for\_Context\_Based\_Personalized\_Recommendations](https://www.researchgate.net/publication/392137788_Leveraging_RAG_with_Transformer_for_Context_Based_Personalized_Recommendations)  
