@@ -1,739 +1,234 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prakhar Kulshrestha - Portfolio Resume</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #333;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header Section */
-        .header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 60px 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
-            animation: pulse 6s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.3; }
-            50% { transform: scale(1.1); opacity: 0.1; }
-        }
-
-        .profile-img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            border: 5px solid #fff;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            margin: 0 auto 30px;
-            position: relative;
-            z-index: 2;
-            object-fit: cover; /* Ensures the image covers the area without distortion */
-            background-color: #f0f0f0; /* Fallback color if the image fails to load */
-        }
-
-        .name {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            position: relative;
-            z-index: 2;
-        }
-
-        .title {
-            font-size: 1.3rem;
-            color: #666;
-            margin-bottom: 30px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .contact-info {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-            position: relative;
-            z-index: 2;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: #555;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            padding: 10px 15px;
-            border-radius: 25px;
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(5px);
-        }
-
-        .contact-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            background: rgba(255, 255, 255, 0.9);
-        }
-
-        /* Section Styles */
-        .section {
-            padding: 80px 0;
-            position: relative;
-        }
-
-        .section:nth-child(even) {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-        }
-
-        .section:nth-child(odd) {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(10px);
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 50px;
-            position: relative;
-            color: #333;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            border-radius: 2px;
-        }
-
-        /* About Section */
-        .about-content {
-            text-align: center;
-            font-size: 1.1rem;
-            color: #555;
-            max-width: 800px;
-            margin: 0 auto;
-            line-height: 1.8;
-        }
-
-        /* Skills Section */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 30px;
-        }
-
-        .skill-category {
-            background: rgba(255, 255, 255, 0.8);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .skill-category:hover {
-            transform: translateY(-5px);
-        }
-
-        .skill-category h3 {
-            color: #667eea;
-            margin-bottom: 20px;
-            font-size: 1.3rem;
-        }
-
-        .skill-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .skill-tag {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-
-        /* Projects Section */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 40px;
-            margin-top: 30px;
-        }
-
-        .project-card {
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 25px 60px rgba(0,0,0,0.15);
-        }
-
-        .project-image {
-            height: 200px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            color: white;
-            font-weight: bold;
-        }
-
-        .project-content {
-            padding: 30px;
-        }
-
-        .project-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            color: #333;
-        }
-
-        .project-description {
-            color: #666;
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
-
-        .project-tech {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 25px;
-        }
-
-        .tech-tag {
-            background: rgba(102, 126, 234, 0.1);
-            color: #667eea;
-            padding: 5px 12px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        .project-links {
-            display: flex;
-            gap: 15px;
-        }
-
-        .project-link {
-            padding: 12px 25px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: 2px solid #667eea;
-        }
-
-        .project-link.primary {
-            background: #667eea;
-            color: white;
-        }
-
-        .project-link.secondary {
-            background: transparent;
-            color: #667eea;
-        }
-
-        .project-link:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
-        }
-
-        /* Experience Section */
-        .experience-timeline {
-            position: relative;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .timeline-item {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 30px;
-            border-radius: 15px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            position: relative;
-            border-left: 4px solid #667eea;
-        }
-
-        .timeline-date {
-            color: #667eea;
-            font-weight: 600;
-            font-size: 0.9rem;
-            margin-bottom: 10px;
-        }
-
-        .timeline-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 5px;
-            color: #333;
-        }
-
-        .timeline-company {
-            color: #666;
-            font-weight: 500;
-            margin-bottom: 15px;
-        }
-
-        .timeline-description {
-            color: #555;
-            line-height: 1.6;
-        }
-
-        .timeline-description ul {
-            list-style-position: outside;
-            padding-left: 20px;
-            margin-top: 10px;
-        }
-
-        .timeline-description li {
-            margin-bottom: 10px;
-        }
-
-
-        /* Footer */
-        .footer {
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            text-align: center;
-            padding: 40px 0;
-            backdrop-filter: blur(10px);
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-bottom: 20px;
-        }
-
-        .footer-link {
-            color: white;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-link:hover {
-            color: #667eea;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .name {
-                font-size: 2.5rem;
-            }
-
-            .contact-info {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .skills-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Scroll animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prakhar Kulshrestha | AI/ML Engineering Leader</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg1:#0f1020; --bg2:#12132a; --grad1:#6a5acd; --grad2:#6f8cff; --card:#171834; --muted:#aab0c6; --text:#eef1ff; --accent:#8aa2ff;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0}
+    body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:linear-gradient(180deg,var(--bg1),var(--bg2));color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+    a{color:var(--accent);text-decoration:none}
+    .container{max-width:1200px;margin:0 auto;padding:0 20px}
+    /* Topbar */
+    .topbar{position:sticky;top:0;z-index:50;background:rgba(15,16,32,.7);backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid rgba(255,255,255,.06)}
+    .topbar-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:800}
+    .brand-badge{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--grad1),var(--grad2));display:grid;place-items:center;font-weight:800}
+    nav ul{display:flex;gap:18px;list-style:none;margin:0;padding:0}
+    nav a{color:var(--muted);font-weight:600;padding:8px 12px;border-radius:8px}
+    nav a:hover{background:rgba(255,255,255,.06);color:var(--text)}
+    /* Hero */
+    .hero{position:relative;padding:84px 0 48px;overflow:hidden}
+    .hero .glow{position:absolute;inset:-40%;background:radial-gradient(600px 600px at 20% 10%,rgba(110,129,255,.25),transparent 60%),radial-gradient(600px 600px at 80% 0%,rgba(140,110,255,.2),transparent 60%)}
+    .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:260px 1fr;gap:32px;align-items:center}
+    .avatar{width:220px;height:220px;border-radius:24px;border:6px solid rgba(255,255,255,.08);background:linear-gradient(135deg,var(--grad1),var(--grad2));display:grid;place-items:center;font-size:60px;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+    .title-xl{font-size:44px;line-height:1.15;margin:0 0 8px;font-weight:800}
+    .subtitle{color:var(--muted);font-weight:600;margin:0 0 18px}
+    .cta{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 16px;border-radius:12px;font-weight:700;border:1px solid rgba(255,255,255,.12);transition:transform .2s, box-shadow .2s}
+    .btn.primary{background:linear-gradient(135deg,var(--grad1),var(--grad2));color:white;border-color:transparent}
+    .btn.secondary{background:rgba(255,255,255,.04);color:var(--text)}
+    .btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(120,130,255,.25)}
+    /* Sections */
+    section{padding:56px 0}
+    .section-title{font-size:28px;margin:0 0 18px;font-weight:800}
+    .muted{color:var(--muted)}
+    .cards{display:grid;gap:18px}
+    @media(min-width:700px){.cards.cols-2{grid-template-columns:repeat(2,1fr)}.cards.cols-3{grid-template-columns:repeat(3,1fr)}}
+    .card{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:18px;box-shadow:0 10px 30px rgba(0,0,0,.25);transition:transform .25s ease, box-shadow .25s ease}
+    .card:hover{transform:translateY(-6px);box-shadow:0 20px 60px rgba(0,0,0,.35)}
+    .badge{display:inline-flex;align-items:center;gap:8px;padding:8px 10px;border-radius:999px;background:rgba(120,130,255,.12);border:1px solid rgba(120,130,255,.25);font-weight:600;color:#cfd6ff}
+    .badge img{width:16px;height:16px}
+    .stack-badges{display:flex;flex-wrap:wrap;gap:10px}
+    .proj-title{font-weight:800;margin:6px 0}
+    .proj-desc{color:var(--muted);font-size:14px;margin:0 0 10px}
+    .proj-links{display:flex;gap:10px;flex-wrap:wrap}
+    .link-btn{padding:8px 12px;border-radius:10px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);font-weight:700}
+    .link-btn.primary{background:linear-gradient(135deg,var(--grad1),var(--grad2));border-color:transparent;color:#fff}
+    /* Footer */
+    footer{padding:40px 0;color:var(--muted);border-top:1px solid rgba(255,255,255,.06);margin-top:20px}
+    .foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+    /* Animations */
+    .fade{opacity:0;transform:translateY(14px);transition:opacity .6s ease, transform .6s ease}
+    .fade.show{opacity:1;transform:none}
+    @media(max-width:900px){.hero-grid{grid-template-columns:1fr}.avatar{width:160px;height:160px;margin-bottom:6px}.title-xl{font-size:34px}}
+  </style>
 </head>
 <body>
-    <!-- Header Section -->
-    <section class="header">
-        <div class="container">
-            <img src="media/pk.jpeg" alt="Prakhar Kulshrestha" class="profile-img">
-            <h1 class="name">Prakhar Kulshrestha</h1>
-            <p class="title">Engineering Manager • Architecting Intelligence into Production Systems</p>
-            <div class="contact-info">
-                <a href="mailto:prakhar1@live.com" class="contact-item">
-                    <span>📧</span>
-                    <span>Mail</span>
-                </a>
-                <a href="https://github.com/praykar" class="contact-item">
-                    <span>🐙</span>
-                    <span>GitHub</span>
-                </a>
-                <a href="https://linkedin.com/in/praykar" class="contact-item">
-                    <span>💼</span>
-                    <span>LinkedIn</span>
-                </a>
-                <a href="https://topmate.io/praykar/page/0QqVCPgUwq" class="contact-item">
-                    <span>💼</span>
-                    <span>Topmate</span>
-                </a>
-            </div>
+  <!-- Topbar -->
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <div class="brand-badge">PK</div>
+        <div>
+          <div style="font-weight:800">Prakhar Kulshrestha</div>
+          <div class="muted" style="font-size:12px">Architecting Intelligence into Production Systems</div>
         </div>
-    </section>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#stack">Tech Stack</a></li>
+          <li><a href="#demos">Projects/Demos</a></li>
+          <li><a href="mailto:prakhar1@live.com">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-    <!-- About Section -->
-    <section class="section">
-        <div class="container">
-            <h2 class="section-title fade-in">About Me</h2>
-            <div class="about-content fade-in">
-                <p>Engineering Manager with 14+ years of experience architecting intelligence into production systems. I specialize in building production-grade AI solutions that seamlessly integrate into business-critical workflows. My expertise spans from designing intelligent architectures to deploying scalable ML systems that deliver measurable business impact. I lead teams in transforming complex data into actionable intelligence, focusing on robust, maintainable systems that operate reliably at scale.</p>
-            </div>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="glow"></div>
+    <div class="container hero-grid">
+      <div class="avatar" aria-hidden="true">🧠</div>
+      <div>
+        <h1 class="title-xl">Prakhar Kulshrestha — AI/ML Engineering Leader</h1>
+        <p class="subtitle">14+ years in AI/ML and Fintech • Production Systems Architecture • Team Leadership</p>
+        <div class="cta">
+          <a class="btn primary" href="#demos">Explore Live Demos</a>
+          <a class="btn secondary" href="https://linkedin.com/in/praykar" target="_blank" rel="noopener">Connect on LinkedIn</a>
+          <a class="btn secondary" href="https://github.com/praykar" target="_blank" rel="noopener">GitHub</a>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- Skills Section -->
-    <section class="section">
-        <div class="container">
-            <h2 class="section-title fade-in">Skills & Technologies</h2>
-            <div class="skills-grid">
-                <div class="skill-category fade-in">
-                    <h3>Machine Learning & AI</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Python</span>
-                        <span class="skill-tag">TensorFlow</span>
-                        <span class="skill-tag">PyTorch</span>
-                        <span class="skill-tag">Scikit-learn</span>
-                        <span class="skill-tag">Pandas</span>
-                        <span class="skill-tag">NumPy</span>
-                        <span class="skill-tag">Jupyter</span>
-                        <span class="skill-tag">MLflow</span>
-                        <span class="skill-tag">Large Language Models (LLMs)</span>
-                        <span class="skill-tag">Natural Language Processing</span>
-                        <span class="skill-tag">Conversational AI</span>
-                        <span class="skill-tag">LangChain</span>
-                        <span class="skill-tag">LangGraph</span>
-                    </div>
-                </div>
-                <div class="skill-category fade-in">
-                    <h3>Data Engineering & MLOps</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Cosmos</span>
-                        <span class="skill-tag">Redis</span>
-                        <span class="skill-tag">Docker</span>
-                        <span class="skill-tag">Kubernetes</span>
-                    </div>
-                </div>
-                <div class="skill-category fade-in">
-                    <h3>Cloud & Infrastructure</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Azure ML</span>
-                        <span class="skill-tag">Azure DevOps</span>
-                        <span class="skill-tag">Azure Data Factory</span>
-                        <span class="skill-tag">GitHub Actions</span>
-                    </div>
-                </div>
-                <div class="skill-category fade-in">
-                    <h3>Leadership & Management</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Team Leadership</span>
-                        <span class="skill-tag">Agile/Scrum</span>
-                        <span class="skill-tag">Technical Strategy</span>
-                        <span class="skill-tag">Product Management</span>
-                        <span class="skill-tag">Stakeholder Management</span>
-                        <span class="skill-tag">Code Reviews</span>
-                    </div>
-                </div>
-            </div>
+  <!-- About / Experience -->
+  <section id="about">
+    <div class="container">
+      <h2 class="section-title">About & Experience</h2>
+      <p class="muted">I design and deliver production-grade AI systems that power business-critical workflows at scale. From architecture to deployment, I lead teams to build robust, observable, and high-impact ML platforms across fintech use cases.</p>
+      <div class="cards cols-3" style="margin-top:18px">
+        <div class="card fade">
+          <div class="badge">🏗️ Production Architecture</div>
+          <p class="proj-desc">Real-time fraud, forecasting, graph QA, conversational AI, and vision quality systems running in production.</p>
         </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section class="section">
-        <div class="container">
-            <h2 class="section-title fade-in">Featured Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card fade-in">
-                    <div class="project-image">🤖</div>
-                    <div class="project-content">
-                        <h3 class="project-title">Intelligent Fraud Detection Architecture</h3>
-                        <p class="project-description">Production-grade intelligent system for real-time fraud detection. Architected end-to-end intelligence pipeline processing 50M+ transactions daily. Built adaptive ML models with automated retraining and ensemble decision-making. Achieved 99.8% accuracy while reducing false positives by 45%.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">TensorFlow</span>
-                            <span class="tech-tag">Apache Kafka</span>
-                            <span class="tech-tag">Azure ML</span>
-                            <span class="tech-tag">Docker</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://fdetect.streamlit.app" class="project-link primary">Preview</a>
-                            <a href="https://github.com/praykar/fraud_detect" class="project-link secondary">GitHub</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card fade-in">
-                    <div class="project-image">📊</div>
-                    <div class="project-content">
-                        <h3 class="project-title">Production Intelligence Platform</h3>
-                        <p class="project-description">Enterprise-grade platform architecting intelligence into business operations. Built predictive analytics engine with automated decision-making capabilities. Designed scalable architecture serving 200+ internal applications with sub-100ms latency. Increased operational efficiency by 35%.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">XGBoost</span>
-                            <span class="tech-tag">PyTorch</span>
-                            <span class="tech-tag">Kubernetes</span>
-                            <span class="tech-tag">Azure ML</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="blog-template.html?post=production-intelligence-platform" class="project-link primary">Preview</a>
-                            <!-- <a href="https://github.com/praykar/churn-prediction" class="project-link secondary">GitHub</a> -->
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card fade-in">
-                    <div class="project-image">🔍</div>
-                    <div class="project-content">
-                        <h3 class="project-title">Intelligent Vision Quality Systems</h3>
-                        <p class="project-description">Production-grade computer vision intelligence for manufacturing quality control. Architected real-time defect detection system with 99.2% accuracy. Built edge-optimized models deployed across 50+ production lines. Integrated seamlessly with existing manufacturing workflows.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">OpenCV</span>
-                            <span class="tech-tag">TensorFlow</span>
-                            <span class="tech-tag">ONNX</span>
-                            <span class="tech-tag">Kubernetes</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="blog-template.html?post=vision-quality-control" class="project-link primary">Preview</a>
-                            <!-- <a href="https://github.com/praykar/cv-quality-control" class="project-link secondary">GitHub</a> -->
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card fade-in">
-                    <div class="project-image">🚀</div>
-                    <div class="project-content">
-                        <h3 class="project-title">Production-Grade MLOps Architecture</h3>
-                        <p class="project-description">Enterprise MLOps framework for deploying production intelligence at scale. Architected automated ML lifecycle management with zero-downtime deployments. Built monitoring and governance systems for 100+ production models. Adopted by 15+ engineering teams across the organization.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">Kubeflow</span>
-                            <span class="tech-tag">Terraform</span>
-                            <span class="tech-tag">Azure DevOps</span>
-                            <span class="tech-tag">Prometheus</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="blog-template.html?post=mlops-framework" class="project-link primary">Preview</a>
-                            <!-- <a href="https://github.com/praykar/mlops-framework" class="project-link secondary">GitHub</a> -->
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card fade-in">
-                    <div class="project-image">💬</div>
-                    <div class="project-content">
-                        <h3 class="project-title">Intelligent Conversational Systems</h3>
-                        <p class="project-description">Production-ready conversational AI architected for enterprise customer service. Built multi-modal intelligence supporting voice, text, and visual inputs. Deployed across 20+ customer touchpoints with 92% resolution rate. Handles 10M+ conversations monthly with human-like accuracy.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">Transformers</span>
-                            <span class="tech-tag">spaCy</span>
-                            <span class="tech-tag">Azure ML</span>
-                            <span class="tech-tag">Docker</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="blog-template.html?post=conversational-ai-system" class="project-link primary">Preview</a>
-                            <a href="RAG.html" class="project-link secondary">Dev</a>
-                            <!-- <a href="https://github.com/praykar/nlp-chatbot" class="project-link secondary">GitHub</a> -->
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card fade-in">
-                    <div class="project-image">📈</div>
-                    <div class="project-content">
-                        <h3 class="project-title">Intelligent Forecasting Architecture</h3>
-                        <p class="project-description">Production-grade forecasting intelligence for supply chain optimization. Architected multi-horizon prediction system with adaptive learning capabilities. Built automated anomaly detection and model recalibration. Improved forecast accuracy by 40% while reducing inventory costs by $25M annually.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">PyTorch</span>
-                            <span class="tech-tag">Optuna</span>
-                            <span class="tech-tag">Apache Spark</span>
-                            <span class="tech-tag">Azure ML</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="blog-template.html?post=intelligent-forecasting-architecture" class="project-link primary">Preview</a>
-                            <!-- <a href="https://github.com/praykar/forecasting-engine" class="project-link secondary">GitHub</a> -->
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="card fade">
+          <div class="badge">📈 Measurable Impact</div>
+          <p class="proj-desc">99.8% fraud accuracy with 45% fewer false positives; 40% forecasting improvement; 10M+ monthly conversations.</p>
         </div>
-    </section>
-
-    <!-- Experience Section -->
-    <section class="section">
-        <div class="container">
-            <h2 class="section-title fade-in">Experience</h2>
-            <div class="experience-timeline">
-                <div class="timeline-item fade-in">
-                    <div class="timeline-date">2019 - Present</div>
-                    <div class="timeline-title">Manager(IT) - AI/ML Systems</div>
-                    <div class="timeline-company">Bank of Baroda</div>
-                    <div class="timeline-description">
-                        <ul>
-                            <li><strong>Model Development:</strong> Designed, developed and implemented Gen-AI models, including GANs, VAEs, and transformer-based models, to solve complex problems.</li>
-                            <li><strong>VRM:</strong> Adaptive RAG and agent-based system that uses Contextual Embedding for improved retrieval accuracy, and Reinforcement Learning from Human Feedback for direct alignment with human preferences.</li>
-                            <li><strong>Research & Innovation:</strong> Conducting research on advanced generative AI techniques and stay updated with the latest developments in the field to continuously improve models and methodologies.</li>
-                            <li><strong>Collaboration:</strong> Working closely with cross-functional teams including data scientists, software engineers, and product managers to integrate generative AI models into existing products and services.</li>
-                            <li><strong>Data Management:</strong> Preprocessing and manage large datasets, ensuring data quality and integrity for training and evaluating generative models.</li>
-                            <li><strong>Performance Optimization:</strong> Optimized AI models for performance and scalability, taking into account computation time, memory usage, and deployment constraints.</li>
-                            <li><strong>Documentation & Reporting:</strong> Document model architecture, processes, and results clearly and comprehensively for knowledge sharing and future reference.</li>
-                            <li><strong>KRI:</strong> Developed an integrated enterprise risk system that enables BU and other POS to measure potential impacts and manage risk from a position of powerful preparedness, tool helps in automate the process of tracking and analyzing KRIs, providing a real-time, comprehensive view of risk landscape.</li>
-                            <li><strong>Credit Rules Engine:</strong> Designed & implemented evaluation model utilizing feature engineering, optimizing the on-fly appraisal process by 25%. Revitalized the credit scoring framework of digital lending models by employing gradient boosting decision tree techniques, facilitating swifter loan approvals & achieving a 1.5x YOY surge in loan approvals.</li>
-                            <li><strong>Early Warning Signal:</strong> Refined the (EWS) tool for payment monitoring by utilizing several classification models, attaining a 0.5x improvement in debt repayment tracking.</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="timeline-item fade-in">
-                    <div class="timeline-date">2013 - 2019</div>
-                    <div class="timeline-title">Credit Analyst</div>
-                    <div class="timeline-company">Bank of Baroda</div>
-                    <div class="timeline-description">
-                        <ul>
-                            <li><strong>Loan Liability Processing System (LLPS):</strong> Embarked on a data-driven approach to credit assessment by analyzing SME Segment financial statements using Python & SQL, leading to 25% improvement in appraisal accuracy & efficiency.</li>
-                            <li>Leveraged Tableau to present compelling data visualisations, analysis & recommendations to managers, highlighting the borrower’s ability to meet repayment obligations.</li>
-                            <li>Redesigned Credit proposals of SME/Retail to shorten overlong appraisals by 50% using existing MS Excel based assessment techniques.</li>
-                            <li><strong>RAM:</strong> Assessment of Business risk, Industry risk, Portfolio management, Due diligence, operational risk & client relationship management using existing MS Excel tools Grew revenue by 2x by meeting customer financial needs.</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="timeline-item fade-in">
-                    <div class="timeline-date">2011 - 2013</div>
-                    <div class="timeline-title">Graduate Engineer</div>
-                    <div class="timeline-company">WMS Software Pvt Ltd</div>
-                    <div class="timeline-description">
-                        <p>Development and maintenance of server-side logic and databases for various internal and client-facing projects. This role involved a blend of backend development, scripting, and database management, with a focus on delivering clean, efficient, and well-documented code within a collaborative Agile environment.</p>
-                        <ul>
-                            <li><strong>Backend Development:</strong> Developed, tested, and deployed robust, scalable backend services and APIs using Python and the Django framework. Assisted in the design and implementation of data models and database schemas.</li>
-                            <li><strong>Automation & Scripting:</strong> Authored various Python scripts to automate routine tasks, including data extraction, processing, and report generation, which reduced manual effort by approximately 15%.</li>
-                            <li><strong>Database & Data Handling:</strong> Wrote and optimized SQL queries for data retrieval and manipulation in PostgreSQL and MySQL databases. Participated in data migration and cleansing activities.</li>
-                            <li><strong>Agile Collaboration:</strong> Actively participated in daily stand-ups, sprint planning, and code review sessions. Utilized version control systems (Git, SVN) to manage codebases.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+        <div class="card fade">
+          <div class="badge">👥 Leadership</div>
+          <p class="proj-desc">Leading cross-functional teams, establishing MLOps practices, and driving end-to-end delivery in regulated environments.</p>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-links">
-                <a href="https://github.com/praykar" class="footer-link">GitHub</a>
-                <a href="https://linkedin.com/in/praykar" class="footer-link">LinkedIn</a>
-                <a href="mailto:prakhar1@live.com" class="footer-link">Email</a>
-                <a href="https://topmate.io/praykar/page/0QqVCPgUwq" class="footer-link">Topmate</a>
-            </div>
-            <p>&copy; 2025 Prakhar Kulshrestha. All rights reserved.</p>
+  <!-- Tech Stack -->
+  <section id="stack">
+    <div class="container">
+      <h2 class="section-title">Tech Stack</h2>
+      <div class="cards cols-3">
+        <div class="card fade">
+          <div class="badge">🤖 ML & AI</div>
+          <div class="stack-badges" style="margin-top:10px">
+            <span class="badge">Python</span>
+            <span class="badge">TensorFlow</span>
+            <span class="badge">PyTorch</span>
+            <span class="badge">scikit-learn</span>
+            <span class="badge">Pandas</span>
+            <span class="badge">NumPy</span>
+            <span class="badge">LLMs</span>
+            <span class="badge">NLP</span>
+            <span class="badge">LangChain</span>
+            <span class="badge">LangGraph</span>
+          </div>
         </div>
-    </footer>
+        <div class="card fade">
+          <div class="badge">⚙️ Data & MLOps</div>
+          <div class="stack-badges" style="margin-top:10px">
+            <span class="badge">Cosmos DB</span>
+            <span class="badge">Redis</span>
+            <span class="badge">Docker</span>
+            <span class="badge">Kubernetes</span>
+            <span class="badge">CI/CD</span>
+            <span class="badge">MLflow</span>
+          </div>
+        </div>
+        <div class="card fade">
+          <div class="badge">☁️ Cloud & Infra</div>
+          <div class="stack-badges" style="margin-top:10px">
+            <span class="badge">Azure ML</span>
+            <span class="badge">Azure DevOps</span>
+            <span class="badge">Azure Data Factory</span>
+            <span class="badge">GitHub Actions</span>
+            <span class="badge">AWS</span>
+            <span class="badge">GCP</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <script>
-        // Smooth scroll animations
-        function animateOnScroll() {
-            const elements = document.querySelectorAll('.fade-in');
-            elements.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                const elementVisible = 150;
-                
-                if (elementTop < window.innerHeight - elementVisible) {
-                    element.classList.add('visible');
-                }
-            });
-        }
+  <!-- Projects / Demos -->
+  <section id="demos">
+    <div class="container">
+      <h2 class="section-title">Projects & Live Demos</h2>
+      <div class="cards cols-3">
+        <div class="card fade">
+          <div class="badge">💬 Conversational AI</div>
+          <div class="proj-title">Enterprise Conversational AI System</div>
+          <p class="proj-desc">Multi-modal customer service assistant with 92% resolution and 10M+ monthly conversations.</p>
+          <div class="proj-links">
+            <a class="link-btn primary" href="https://huggingface.co/spaces/praykar/conversational_ai" target="_blank" rel="noopener">Live Demo</a>
+          </div>
+        </div>
+        <div class="card fade">
+          <div class="badge">🛡️ Fraud Detection</div>
+          <div class="proj-title">Real-time Fraud Detection Architecture</div>
+          <p class="proj-desc">Streaming architecture processing 50M+ transactions/day; 99.8% accuracy; -45% false positives.</p>
+          <div class="proj-links">
+            <a class="link-btn primary" href="https://fdetect.streamlit.app/" target="_blank" rel="noopener">Live Demo</a>
+          </div>
+        </div>
+        <div class="card fade">
+          <div class="badge">🧠 Graph QA</div>
+          <div class="proj-title">Knowledge Graph QA System</div>
+          <p class="proj-desc">Graph-powered semantic QA with relationship traversal and contextual answers.</p>
+          <div class="proj-links">
+            <a class="link-btn primary" href="https://huggingface.co/spaces/praykar/graph_qa" target="_blank" rel="noopener">Live Demo</a>
+          </div>
+        </div>
+        <div class="card fade">
+          <div class="badge">📈 Forecasting</div>
+          <div class="proj-title">Time Series Forecasting</div>
+          <p class="proj-desc">Multi-horizon forecasting with PyTorch/Optuna/Spark; 40% accuracy improvement; $25M savings.</p>
+          <div class="proj-links">
+            <a class="link-btn primary" href="https://huggingface.co/spaces/praykar/forecasting" target="_blank" rel="noopener">Live Demo</a>
+          </div>
+        </div>
+        <div class="card fade">
+          <div class="badge">🚀 MLOps</div>
+          <div class="proj-title">Enterprise MLOps Framework</div>
+          <p class="proj-desc">Zero-downtime deployments, monitoring, governance; used by 15+ teams managing 100+ models.</p>
+          <div class="proj-links">
+            <a class="link-btn primary" href="https://huggingface.co/spaces/praykar/mlops_framework" target="_blank" rel="noopener">Live Demo</a>
+          </div>
+        </div>
+        <div class="card fade">
+          <div class="badge">🖼️ Vision QC</div>
+          <div class="proj-title">Vision Quality Control</div>
+          <p class="proj-desc">Real-time defect detection on 50+ production lines; 99.2% accuracy.</p>
+          <div class="proj-links">
+            <a class="link-btn primary" href="https://huggingface.co/spaces/praykar/vision_quality" target="_blank" rel="noopener">Live Demo</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Initialize animations
-        window.addEventListener('scroll', animateOnScroll);
-        window.addEventListener('load', animateOnScroll);
-        
-        // Add some interactive hover effects
-        document.querySelectorAll('.project-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-10px) scale(1.02)';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
-            });
-        });
-    </script>
-</body>
-</html>
+  <footer>
+    <div class="container foot">
+      <div>© 2025 Prakhar Kulshrestha. All rights reserved.</div>
+      <div class="stack-badges">
+        <a class="badge" href="mailto:prakhar1@live.com">Email</a>
+        <a class="badge" href="https://linkedin.com/in/praykar" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="badge" href="https://github.com/praykar" target
