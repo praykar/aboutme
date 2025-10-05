@@ -1,234 +1,279 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Prakhar Kulshrestha | AI/ML Engineering Leader</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg1:#0f1020; --bg2:#12132a; --grad1:#6a5acd; --grad2:#6f8cff; --card:#171834; --muted:#aab0c6; --text:#eef1ff; --accent:#8aa2ff;
+    body {
+      margin: 0;
+      font-family: 'Inter', Arial, sans-serif;
+      background: linear-gradient(135deg, #7451f3 0%, #4fd1c5 100%);
+      color: #222;
     }
-    *{box-sizing:border-box}
-    html,body{margin:0}
-    body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:linear-gradient(180deg,var(--bg1),var(--bg2));color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
-    a{color:var(--accent);text-decoration:none}
-    .container{max-width:1200px;margin:0 auto;padding:0 20px}
-    /* Topbar */
-    .topbar{position:sticky;top:0;z-index:50;background:rgba(15,16,32,.7);backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid rgba(255,255,255,.06)}
-    .topbar-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
-    .brand{display:flex;align-items:center;gap:10px;font-weight:800}
-    .brand-badge{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--grad1),var(--grad2));display:grid;place-items:center;font-weight:800}
-    nav ul{display:flex;gap:18px;list-style:none;margin:0;padding:0}
-    nav a{color:var(--muted);font-weight:600;padding:8px 12px;border-radius:8px}
-    nav a:hover{background:rgba(255,255,255,.06);color:var(--text)}
-    /* Hero */
-    .hero{position:relative;padding:84px 0 48px;overflow:hidden}
-    .hero .glow{position:absolute;inset:-40%;background:radial-gradient(600px 600px at 20% 10%,rgba(110,129,255,.25),transparent 60%),radial-gradient(600px 600px at 80% 0%,rgba(140,110,255,.2),transparent 60%)}
-    .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:260px 1fr;gap:32px;align-items:center}
-    .avatar{width:220px;height:220px;border-radius:24px;border:6px solid rgba(255,255,255,.08);background:linear-gradient(135deg,var(--grad1),var(--grad2));display:grid;place-items:center;font-size:60px;box-shadow:0 20px 60px rgba(0,0,0,.35)}
-    .title-xl{font-size:44px;line-height:1.15;margin:0 0 8px;font-weight:800}
-    .subtitle{color:var(--muted);font-weight:600;margin:0 0 18px}
-    .cta{display:flex;gap:12px;flex-wrap:wrap}
-    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 16px;border-radius:12px;font-weight:700;border:1px solid rgba(255,255,255,.12);transition:transform .2s, box-shadow .2s}
-    .btn.primary{background:linear-gradient(135deg,var(--grad1),var(--grad2));color:white;border-color:transparent}
-    .btn.secondary{background:rgba(255,255,255,.04);color:var(--text)}
-    .btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(120,130,255,.25)}
-    /* Sections */
-    section{padding:56px 0}
-    .section-title{font-size:28px;margin:0 0 18px;font-weight:800}
-    .muted{color:var(--muted)}
-    .cards{display:grid;gap:18px}
-    @media(min-width:700px){.cards.cols-2{grid-template-columns:repeat(2,1fr)}.cards.cols-3{grid-template-columns:repeat(3,1fr)}}
-    .card{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:18px;box-shadow:0 10px 30px rgba(0,0,0,.25);transition:transform .25s ease, box-shadow .25s ease}
-    .card:hover{transform:translateY(-6px);box-shadow:0 20px 60px rgba(0,0,0,.35)}
-    .badge{display:inline-flex;align-items:center;gap:8px;padding:8px 10px;border-radius:999px;background:rgba(120,130,255,.12);border:1px solid rgba(120,130,255,.25);font-weight:600;color:#cfd6ff}
-    .badge img{width:16px;height:16px}
-    .stack-badges{display:flex;flex-wrap:wrap;gap:10px}
-    .proj-title{font-weight:800;margin:6px 0}
-    .proj-desc{color:var(--muted);font-size:14px;margin:0 0 10px}
-    .proj-links{display:flex;gap:10px;flex-wrap:wrap}
-    .link-btn{padding:8px 12px;border-radius:10px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);font-weight:700}
-    .link-btn.primary{background:linear-gradient(135deg,var(--grad1),var(--grad2));border-color:transparent;color:#fff}
-    /* Footer */
-    footer{padding:40px 0;color:var(--muted);border-top:1px solid rgba(255,255,255,.06);margin-top:20px}
-    .foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
-    /* Animations */
-    .fade{opacity:0;transform:translateY(14px);transition:opacity .6s ease, transform .6s ease}
-    .fade.show{opacity:1;transform:none}
-    @media(max-width:900px){.hero-grid{grid-template-columns:1fr}.avatar{width:160px;height:160px;margin-bottom:6px}.title-xl{font-size:34px}}
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 3rem 1.5rem;
+    }
+    .hero {
+      text-align: center;
+      padding: 4rem 1rem 2rem 1rem;
+      color: #fff;
+    }
+    .hero h1 {
+      font-size: 2.7rem;
+      margin: 0;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    .hero h3 {
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: #e2e6fa;
+      margin-top: 0.6rem;
+    }
+    .hero .links a {
+      margin: 0 0.3rem;
+      color: #fff;
+      text-decoration: underline;
+      font-weight: 500;
+      font-size: 1.02rem;
+      letter-spacing: 0.1px;
+      transition: color 0.2s;
+    }
+    .hero .links a:hover { color: #4fd1c5; }
+
+    section {
+      margin-bottom: 2.7rem;
+    }
+    section h2 {
+      font-size: 1.5rem;
+      margin-bottom: 0.6rem;
+      font-weight: 600;
+      color: #7451f3;
+      letter-spacing: -0.5px;
+    }
+
+    .card-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 8px 30px rgba(80, 80, 172, 0.09);
+      padding: 1.6rem 1.2rem;
+      min-width: 280px;
+      width: calc(33% - 1.4rem);
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.58s, transform 0.58s;
+      position: relative;
+      border: 1.5px solid #f4f0fa;
+    }
+    .card.show {
+      opacity: 1;
+      transform: none;
+    }
+    .card-title {
+      font-size: 1.14rem;
+      font-weight: 600;
+      color: #4586ff;
+      margin-bottom: 0.45rem;
+    }
+    .card-desc {
+      font-size: 1rem;
+      color: #444;
+      margin-bottom: 0.5rem;
+    }
+    .card-tech {
+      margin-bottom: 0.7rem;
+      font-size: .94rem;
+      color: #906cff;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+    }
+    .card-links a {
+      color: #4fd1c5;
+      text-decoration: underline;
+      margin-right: 1.1rem;
+      font-size: 0.98rem;
+      font-weight: 500;
+      transition: color 0.18s;
+    }
+    .card-links a:hover { color: #7451f3; }
+
+    /* Tech Stack Badges */
+    .tech-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-bottom: 0.8rem;
+    }
+    .tech-badge {
+      display: inline-block;
+      background: #e9e7fa;
+      color: #7651f3;
+      border-radius: 12px;
+      font-size: 0.97rem;
+      padding: 0.33rem 0.85rem;
+      font-weight: 500;
+      margin: 2px 0;
+      box-shadow: 0 2px 8px rgba(80,80,172,0.07);
+    }
+
+    @media (max-width: 900px) {
+      .card-row { flex-direction: column; gap: 1.2rem; }
+      .card { width: 100%; min-width: unset; }
+      .container { padding: 1.2rem 0.2rem; }
+    }
   </style>
 </head>
 <body>
-  <!-- Topbar -->
-  <header class="topbar">
-    <div class="container topbar-inner">
-      <div class="brand">
-        <div class="brand-badge">PK</div>
-        <div>
-          <div style="font-weight:800">Prakhar Kulshrestha</div>
-          <div class="muted" style="font-size:12px">Architecting Intelligence into Production Systems</div>
-        </div>
-      </div>
-      <nav>
-        <ul>
-          <li><a href="#about">About</a></li>
-          <li><a href="#stack">Tech Stack</a></li>
-          <li><a href="#demos">Projects/Demos</a></li>
-          <li><a href="mailto:prakhar1@live.com">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-
-  <!-- Hero -->
-  <section class="hero">
-    <div class="glow"></div>
-    <div class="container hero-grid">
-      <div class="avatar" aria-hidden="true">🧠</div>
-      <div>
-        <h1 class="title-xl">Prakhar Kulshrestha — AI/ML Engineering Leader</h1>
-        <p class="subtitle">14+ years in AI/ML and Fintech • Production Systems Architecture • Team Leadership</p>
-        <div class="cta">
-          <a class="btn primary" href="#demos">Explore Live Demos</a>
-          <a class="btn secondary" href="https://linkedin.com/in/praykar" target="_blank" rel="noopener">Connect on LinkedIn</a>
-          <a class="btn secondary" href="https://github.com/praykar" target="_blank" rel="noopener">GitHub</a>
-        </div>
+  <div class="container">
+    <div class="hero">
+      <h1>Prakhar Kulshrestha</h1>
+      <h3>AI/ML Engineering Leader • 14+ Years in Fintech & Production Systems Architecture</h3>
+      <div class="links">
+        <a href="mailto:prakhar1@live.com">Email</a>|
+        <a href="https://github.com/praykar" target="_blank">GitHub</a>|
+        <a href="https://linkedin.com/in/praykar" target="_blank">LinkedIn</a>|
+        <a href="https://topmate.io/praykar" target="_blank">Topmate</a>
       </div>
     </div>
-  </section>
 
-  <!-- About / Experience -->
-  <section id="about">
-    <div class="container">
-      <h2 class="section-title">About & Experience</h2>
-      <p class="muted">I design and deliver production-grade AI systems that power business-critical workflows at scale. From architecture to deployment, I lead teams to build robust, observable, and high-impact ML platforms across fintech use cases.</p>
-      <div class="cards cols-3" style="margin-top:18px">
-        <div class="card fade">
-          <div class="badge">🏗️ Production Architecture</div>
-          <p class="proj-desc">Real-time fraud, forecasting, graph QA, conversational AI, and vision quality systems running in production.</p>
-        </div>
-        <div class="card fade">
-          <div class="badge">📈 Measurable Impact</div>
-          <p class="proj-desc">99.8% fraud accuracy with 45% fewer false positives; 40% forecasting improvement; 10M+ monthly conversations.</p>
-        </div>
-        <div class="card fade">
-          <div class="badge">👥 Leadership</div>
-          <p class="proj-desc">Leading cross-functional teams, establishing MLOps practices, and driving end-to-end delivery in regulated environments.</p>
-        </div>
+    <section>
+      <h2>About & Experience</h2>
+      <p>
+        I architect, lead, and deliver production-grade AI solutions powering business-critical workflows across financial services and technology. With deep applied expertise in machine learning (ML), natural language, time series, graph intelligence, and MLOps, I build robust, scalable, and compliant ML platforms that drive measurable impact for global fintechs.
+      </p>
+      <ul>
+        <li>🏗️ Production systems serving 200+ apps, 50M+ daily transactions</li>
+        <li>📈 99.8% fraud accuracy, 40% forecasting improvement, 10M+ monthly conversations</li>
+        <li>👥 Leadership in cross-functional teams and MLOps best practices</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Tech Stack</h2>
+      <div class="tech-badges">
+        <span class="tech-badge">Python</span>
+        <span class="tech-badge">TensorFlow</span>
+        <span class="tech-badge">PyTorch</span>
+        <span class="tech-badge">scikit-learn</span>
+        <span class="tech-badge">Pandas</span>
+        <span class="tech-badge">NumPy</span>
+        <span class="tech-badge">LangChain</span>
+        <span class="tech-badge">LangGraph</span>
+        <span class="tech-badge">Machine Learning</span>
+        <span class="tech-badge">LLMs</span>
+        <span class="tech-badge">NLP</span>
+        <span class="tech-badge">MLflow</span>
+        <span class="tech-badge">Cosmos DB</span>
+        <span class="tech-badge">Redis</span>
+        <span class="tech-badge">Docker</span>
+        <span class="tech-badge">Kubernetes</span>
+        <span class="tech-badge">CI/CD</span>
+        <span class="tech-badge">Azure ML</span>
+        <span class="tech-badge">Azure DevOps</span>
+        <span class="tech-badge">Azure Data Factory</span>
+        <span class="tech-badge">GitHub Actions</span>
+        <span class="tech-badge">AWS</span>
+        <span class="tech-badge">GCP</span>
+        <span class="tech-badge">Neo4j</span>
+        <span class="tech-badge">Streamlit</span>
+        <span class="tech-badge">Hugging Face</span>
+        <span class="tech-badge">FastAPI</span>
+        <span class="tech-badge">ONNX</span>
+        <span class="tech-badge">Prometheus</span>
+        <span class="tech-badge">Optuna</span>
+        <span class="tech-badge">Apache Spark</span>
+        <span class="tech-badge">XGBoost</span>
+        <span class="tech-badge">spaCy</span>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Tech Stack -->
-  <section id="stack">
-    <div class="container">
-      <h2 class="section-title">Tech Stack</h2>
-      <div class="cards cols-3">
+    <section>
+      <h2>Projects & Live Demos</h2>
+      <div class="card-row">
+        <!-- Card 1 -->
         <div class="card fade">
-          <div class="badge">🤖 ML & AI</div>
-          <div class="stack-badges" style="margin-top:10px">
-            <span class="badge">Python</span>
-            <span class="badge">TensorFlow</span>
-            <span class="badge">PyTorch</span>
-            <span class="badge">scikit-learn</span>
-            <span class="badge">Pandas</span>
-            <span class="badge">NumPy</span>
-            <span class="badge">LLMs</span>
-            <span class="badge">NLP</span>
-            <span class="badge">LangChain</span>
-            <span class="badge">LangGraph</span>
+          <div class="card-title">Conversational AI</div>
+          <div class="card-desc">Enterprise multi-modal AI assistant – 10M+ monthly conversations, 92% resolution rate.</div>
+          <div class="card-tech">Python | Transformers | spaCy | Azure ML | Docker</div>
+          <div class="card-links">
+            <a href="https://huggingface.co/spaces/praykar/conversational_ai" target="_blank">Live Demo</a>
           </div>
         </div>
+        <!-- Card 2 -->
         <div class="card fade">
-          <div class="badge">⚙️ Data & MLOps</div>
-          <div class="stack-badges" style="margin-top:10px">
-            <span class="badge">Cosmos DB</span>
-            <span class="badge">Redis</span>
-            <span class="badge">Docker</span>
-            <span class="badge">Kubernetes</span>
-            <span class="badge">CI/CD</span>
-            <span class="badge">MLflow</span>
+          <div class="card-title">Fraud Detection</div>
+          <div class="card-desc">Real-time streaming fraud system – 50M+ transactions/day, 99.8% accuracy, -45% false positives.</div>
+          <div class="card-tech">Python | TensorFlow | Kafka | Azure ML | Docker</div>
+          <div class="card-links">
+            <a href="https://fdetect.streamlit.app/" target="_blank">Live Demo</a>
           </div>
         </div>
+        <!-- Card 3 -->
         <div class="card fade">
-          <div class="badge">☁️ Cloud & Infra</div>
-          <div class="stack-badges" style="margin-top:10px">
-            <span class="badge">Azure ML</span>
-            <span class="badge">Azure DevOps</span>
-            <span class="badge">Azure Data Factory</span>
-            <span class="badge">GitHub Actions</span>
-            <span class="badge">AWS</span>
-            <span class="badge">GCP</span>
+          <div class="card-title">Graph QA</div>
+          <div class="card-desc">Knowledge graph-powered question answering with relationship traversal and context.</div>
+          <div class="card-tech">Python | Neo4j | LangChain | Streamlit</div>
+          <div class="card-links">
+            <a href="https://huggingface.co/spaces/praykar/graph_qa" target="_blank">Live Demo</a>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Projects / Demos -->
-  <section id="demos">
-    <div class="container">
-      <h2 class="section-title">Projects & Live Demos</h2>
-      <div class="cards cols-3">
+        <!-- Card 4 -->
         <div class="card fade">
-          <div class="badge">💬 Conversational AI</div>
-          <div class="proj-title">Enterprise Conversational AI System</div>
-          <p class="proj-desc">Multi-modal customer service assistant with 92% resolution and 10M+ monthly conversations.</p>
-          <div class="proj-links">
-            <a class="link-btn primary" href="https://huggingface.co/spaces/praykar/conversational_ai" target="_blank" rel="noopener">Live Demo</a>
+          <div class="card-title">Forecasting</div>
+          <div class="card-desc">Multi-horizon supply chain forecasting – 40% improvement, $25M annual savings.</div>
+          <div class="card-tech">Python | PyTorch | Spark | Optuna | Azure ML</div>
+          <div class="card-links">
+            <a href="https://huggingface.co/spaces/praykar/forecasting" target="_blank">Live Demo</a>
           </div>
         </div>
+        <!-- Card 5 -->
         <div class="card fade">
-          <div class="badge">🛡️ Fraud Detection</div>
-          <div class="proj-title">Real-time Fraud Detection Architecture</div>
-          <p class="proj-desc">Streaming architecture processing 50M+ transactions/day; 99.8% accuracy; -45% false positives.</p>
-          <div class="proj-links">
-            <a class="link-btn primary" href="https://fdetect.streamlit.app/" target="_blank" rel="noopener">Live Demo</a>
+          <div class="card-title">MLOps Framework</div>
+          <div class="card-desc">Production MLOps pipeline – zero-downtime deployments, 100+ models, 15+ teams.</div>
+          <div class="card-tech">Python | Kubeflow | Terraform | Azure DevOps | Prometheus</div>
+          <div class="card-links">
+            <a href="https://huggingface.co/spaces/praykar/mlops_framework" target="_blank">Live Demo</a>
           </div>
         </div>
+        <!-- Card 6 -->
         <div class="card fade">
-          <div class="badge">🧠 Graph QA</div>
-          <div class="proj-title">Knowledge Graph QA System</div>
-          <p class="proj-desc">Graph-powered semantic QA with relationship traversal and contextual answers.</p>
-          <div class="proj-links">
-            <a class="link-btn primary" href="https://huggingface.co/spaces/praykar/graph_qa" target="_blank" rel="noopener">Live Demo</a>
-          </div>
-        </div>
-        <div class="card fade">
-          <div class="badge">📈 Forecasting</div>
-          <div class="proj-title">Time Series Forecasting</div>
-          <p class="proj-desc">Multi-horizon forecasting with PyTorch/Optuna/Spark; 40% accuracy improvement; $25M savings.</p>
-          <div class="proj-links">
-            <a class="link-btn primary" href="https://huggingface.co/spaces/praykar/forecasting" target="_blank" rel="noopener">Live Demo</a>
-          </div>
-        </div>
-        <div class="card fade">
-          <div class="badge">🚀 MLOps</div>
-          <div class="proj-title">Enterprise MLOps Framework</div>
-          <p class="proj-desc">Zero-downtime deployments, monitoring, governance; used by 15+ teams managing 100+ models.</p>
-          <div class="proj-links">
-            <a class="link-btn primary" href="https://huggingface.co/spaces/praykar/mlops_framework" target="_blank" rel="noopener">Live Demo</a>
-          </div>
-        </div>
-        <div class="card fade">
-          <div class="badge">🖼️ Vision QC</div>
-          <div class="proj-title">Vision Quality Control</div>
-          <p class="proj-desc">Real-time defect detection on 50+ production lines; 99.2% accuracy.</p>
-          <div class="proj-links">
-            <a class="link-btn primary" href="https://huggingface.co/spaces/praykar/vision_quality" target="_blank" rel="noopener">Live Demo</a>
+          <div class="card-title">Vision Quality Control</div>
+          <div class="card-desc">Real-time manufacturing QC – deployed to 50+ lines, 99.2% defect detection accuracy.</div>
+          <div class="card-tech">Python | OpenCV | TensorFlow | ONNX | Kubernetes</div>
+          <div class="card-links">
+            <a href="https://huggingface.co/spaces/praykar/vision_quality" target="_blank">Live Demo</a>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
 
-  <footer>
-    <div class="container foot">
-      <div>© 2025 Prakhar Kulshrestha. All rights reserved.</div>
-      <div class="stack-badges">
-        <a class="badge" href="mailto:prakhar1@live.com">Email</a>
-        <a class="badge" href="https://linkedin.com/in/praykar" target="_blank" rel="noopener">LinkedIn</a>
-        <a class="badge" href="https://github.com/praykar" target
+  <!-- Card fade-in JavaScript -->
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var fadeEls = document.querySelectorAll('.fade');
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    fadeEls.forEach(function(el) { observer.observe(el); });
+  });
+  </script>
+</body>
+</html>
