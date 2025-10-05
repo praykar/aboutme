@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>All Blog Posts</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      background-color: #f6f8fa;
+      color: #24292e;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 860px;
+      margin: 30px auto;
+      background-color: #fff;
+      border: 1px solid #e1e4e8;
+      border-radius: 8px;
+      padding: 30px 45px 45px 45px;
+      box-shadow: 0 5px 24px 0 rgba(40, 44, 52, 0.12);
+    }
+    a, .post-link {
+      color: #0366d6;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    a:hover, .post-link:hover {
+      text-decoration: underline;
+    }
+    h1 {
+      font-size: 2.2em;
+      margin-top: 10px; 
+      margin-bottom: 35px;
+    }
+    ul {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 0;
+    }
+    .blog-gallery {
+      margin-top: 30px;
+    }
+    .blog-post-card {
+      margin-bottom: 26px;
+      padding: 22px 28px;
+      background: #f6f8fa;
+      border-radius: 6px;
+      border: 1px solid #e1e4e8;
+      transition: box-shadow .2s;
+    }
+    .blog-post-card:hover {
+      box-shadow: 0 6px 20px 0 rgba(40, 44, 52, 0.11);
+      background: #f0f3fa;
+    }
+    .card-title {
+      font-size: 1.28em;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .card-desc {
+      font-size: 1em;
+      color: #6a737d;
+      margin-bottom: 2px;
+    }
+    .ai-section {
+      margin-top: 45px;
+    }
+    .ai-solutions-heading {
+      margin-bottom: 14px;
+      font-size: 1.15em;
+      letter-spacing: 1px;
+      color: #4f47b4;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" style="margin-bottom: 30px; display: inline-block;">← Back to Portfolio</a>
+    <h1>All Blog & Research Articles</h1>
+    <div class="blog-gallery">
+      <ul>
+        <li class="blog-post-card">
+          <a href="blog-template.html?post=introduction" class="post-link">
+            <div class="card-title">Blog: Introduction</div>
+            <div class="card-desc">Overview and personal background for this technical blog.</div>
+          </a>
+        </li>
+        <li class="blog-post-card">
+          <a href="blog-template.html?post=executive_summary" class="post-link">
+            <div class="card-title">Executive Summary: RAG Personalization</div>
+            <div class="card-desc">Hybrid RAG architecture and core design proposals for smarter bots.</div>
+          </a>
+        </li>
+        <li class="blog-post-card">
+          <a href="blog-template.html?post=graphqa_in_rag" class="post-link">
+            <div class="card-title">GraphQA in RAG</div>
+            <div class="card-desc">Technical deep dive: using knowledge graphs in advanced RAG.</div>
+          </a>
+        </li>
+        <li class="blog-post-card">
+          <a href="blog-template.html?post=conversational-ai-system" class="post-link">
+            <div class="card-title">Conversational AI System</div>
+            <div class="card-desc">Enterprise-grade conversational system using LangChain and LLMs.</div>
+          </a>
+        </li>
+        <li class="blog-post-card">
+          <a href="blog-template.html?post=fraud-detection-system" class="post-link">
+            <div class="card-title">Fraud Detection System</div>
+            <div class="card-desc">Scalable streaming fraud detection using ML and cloud infra.</div>
+          </a>
+        </li>
+        <li class="blog-post-card">
+          <a href="blog-template.html?post=intelligent-forecasting-architecture" class="post-link">
+            <div class="card-title">Intelligent Forecasting Architecture</div>
+            <div class="card-desc">Next-gen multi-horizon forecasting for supply chain optimization.</div>
+          </a>
+        </li>
+        <li class="blog-post-card">
+          <a href="blog-template.html?post=mlops-framework" class="post-link">
+            <div class="card-title">MLOps Framework</div>
+            <div class="card-desc">Robust production MLops for enterprise model deployments.</div>
+          </a>
+        </li>
+        <li class="blog-post-card">
+          <a href="blog-template.html?post=production-intelligence-platform" class="post-link">
+            <div class="card-title">Production Intelligence Platform</div>
+            <div class="card-desc">Platform design for real-time analytics and production ML.</div>
+          </a>
+        </li>
+        <li class="blog-post-card">
+          <a href="blog-template.html?post=recent-advances-ml-fintech-october-2025" class="post-link">
+            <div class="card-title">Recent Advances: ML in Fintech (Oct 2025)</div>
+            <div class="card-desc">Fintech ML innovations and trends as of October 2025.</div>
+          </a>
+        </li>
+        <li class="blog-post-card">
+          <a href="blog-template.html?post=vision-quality-control" class="post-link">
+            <div class="card-title">Vision Quality Control</div>
+            <div class="card-desc">Computer vision pipeline for manufacturing quality assurance.</div>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="ai-section">
+      <div class="ai-solutions-heading">Featured AI Solution Demos</div>
+      <ul>
+        <li class="blog-post-card">
+          <a class="post-link" href="RAG.html">RAG: Personalizing Bot Responses</a>
+        </li>
+        <li class="blog-post-card">
+          <a class="post-link" href="RAG_MF.html">RAG + Matrix Factorization: Architecture Analysis</a>
+        </li>
+        <li class="blog-post-card">
+          <a class="post-link" href="blog/ai_solutions/conversational_ai/README.md" target="_blank">Conversational AI: System README</a>
+        </li>
+        <li class="blog-post-card">
+          <a class="post-link" href="blog/ai_solutions/fraud_detection/README.md" target="_blank">Fraud Detection: System README</a>
+        </li>
+        <li class="blog-post-card">
+          <a class="post-link" href="blog/ai_solutions/graph_qa/README.md" target="_blank">Graph QA: System README</a>
+        </li>
+        <li class="blog-post-card">
+          <a class="post-link" href="blog/ai_solutions/forecasting/README.md" target="_blank">Forecasting: System README</a>
+        </li>
+        <li class="blog-post-card">
+          <a class="post-link" href="blog/ai_solutions/mlops_framework/README.md" target="_blank">MLOps Framework: System README</a>
+        </li>
+        <li class="blog-post-card">
+          <a class="post-link" href="blog/ai_solutions/vision_quality/README.md" target="_blank">Vision Quality: System README</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>
