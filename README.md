@@ -62,7 +62,7 @@ All demos include:
 #### 1. Conversational AI System
 - **Description**: Production-ready conversational AI for enterprise customer service
 - **Tech**: Python, Transformers, spaCy, Azure ML, Docker
-- **Demo**: [Live Hugging Face Space](https://huggingface.co/spaces/praykar/conversational_ai)
+- **Demo**: [Live Hugging Face Space](https://huggingface.co/spaces/pray-kar/intellimldemo)
 - **Features**: Multi-modal intelligence, 92% resolution rate, 10M+ monthly conversations
 
 #### 2. Fraud Detection Architecture
@@ -74,25 +74,25 @@ All demos include:
 #### 3. Graph QA System
 - **Description**: Knowledge graph-based question answering
 - **Tech**: Python, Neo4j, LangChain, Streamlit
-- **Demo**: [Live Hugging Face Space](https://huggingface.co/spaces/praykar/graph_qa)
+- **Demo**: [Live Hugging Face Space](https://huggingface.co/spaces/pray-kar/intellimldemo)
 - **Features**: Semantic search, relationship traversal, contextual answers
 
 #### 4. Time Series Forecasting
 - **Description**: Multi-horizon prediction for supply chain optimization
 - **Tech**: Python, PyTorch, Optuna, Apache Spark, Azure ML
-- **Demo**: [Live Hugging Face Space](https://huggingface.co/spaces/praykar/forecasting)
+- **Demo**: [Live Hugging Face Space](https://huggingface.co/spaces/pray-kar/intellimldemo)
 - **Impact**: 40% improved accuracy, $25M annual cost savings
 
 #### 5. MLOps Framework
 - **Description**: Enterprise MLOps for deploying production intelligence at scale
 - **Tech**: Python, Kubeflow, Terraform, Azure DevOps, Prometheus
-- **Demo**: [Live Hugging Face Space](https://huggingface.co/spaces/praykar/mlops_framework)
+- **Demo**: [Live Hugging Face Space](https://huggingface.co/spaces/pray-kar/intellimldemo)
 - **Adoption**: Used by 15+ engineering teams, manages 100+ models
 
 #### 6. Vision Quality Control
 - **Description**: Computer vision for manufacturing quality control
 - **Tech**: Python, OpenCV, TensorFlow, ONNX, Kubernetes
-- **Demo**: [Live Hugging Face Space](https://huggingface.co/spaces/praykar/vision_quality)
+- **Demo**: [Live Hugging Face Space](https://huggingface.co/spaces/pray-kar/intellimldemo)
 - **Deployment**: 50+ production lines, 99.2% accuracy
 
 ## Repository Structure
@@ -140,7 +140,7 @@ aboutme/
 
 ## Professional Value
 
-### For Recruiters & Hiring Managers
+### For Explorers
 - ✅ Demonstrates end-to-end ML engineering capabilities
 - ✅ Shows production-ready, scalable architectures
 - ✅ Proves hands-on coding and system design skills
